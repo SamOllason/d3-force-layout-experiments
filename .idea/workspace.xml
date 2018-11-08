@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b257a237-fd3c-44b6-86d2-ecbce95cb690" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/addRemoveNodes.html" afterPath="$PROJECT_DIR$/addRemoveNodes.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -16,23 +17,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="addRemoveNodes.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="addRemoveNodes.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/addRemoveNodes.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2820">
-              <caret line="225" column="0" lean-forward="false" selection-start-line="225" selection-start-column="0" selection-end-line="225" selection-end-column="0" />
+            <state relative-caret-position="392">
+              <caret line="28" column="20" lean-forward="false" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
               <folding>
-                <element signature="e#2631#2873#0" expanded="false" />
-                <element signature="e#2905#3248#0" expanded="false" />
-                <element signature="e#3473#3613#0" expanded="false" />
-                <element signature="e#3643#3704#0" expanded="false" />
-                <element signature="e#3736#3954#0" expanded="false" />
+                <element signature="e#2630#2872#0" expanded="false" />
+                <element signature="e#2904#3247#0" expanded="false" />
+                <element signature="e#3472#3612#0" expanded="false" />
+                <element signature="e#3642#3703#0" expanded="false" />
+                <element signature="e#3735#3953#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
@@ -74,6 +75,7 @@
         <option value="$PROJECT_DIR$/index_working.html" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/addRemoveNodes.html" />
       </list>
     </option>
   </component>
@@ -193,7 +195,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/addRemoveNodes.html</url>
-          <line>135</line>
+          <line>134</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
@@ -207,11 +209,11 @@
         <state relative-caret-position="2220">
           <caret line="185" column="18" lean-forward="false" selection-start-line="185" selection-start-column="18" selection-end-line="185" selection-end-column="18" />
           <folding>
-            <element signature="e#2631#2873#0" expanded="false" />
-            <element signature="e#2905#3248#0" expanded="false" />
-            <element signature="e#3473#3613#0" expanded="false" />
-            <element signature="e#3643#3704#0" expanded="false" />
-            <element signature="e#3736#3954#0" expanded="false" />
+            <element signature="e#2630#2872#0" expanded="false" />
+            <element signature="e#2904#3247#0" expanded="false" />
+            <element signature="e#3472#3612#0" expanded="false" />
+            <element signature="e#3642#3703#0" expanded="false" />
+            <element signature="e#3735#3953#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -248,25 +250,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/addRemoveNodes.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2820">
-          <caret line="225" column="0" lean-forward="false" selection-start-line="225" selection-start-column="0" selection-end-line="225" selection-end-column="0" />
-          <folding>
-            <element signature="e#2631#2873#0" expanded="false" />
-            <element signature="e#2905#3248#0" expanded="false" />
-            <element signature="e#3473#3613#0" expanded="false" />
-            <element signature="e#3643#3704#0" expanded="false" />
-            <element signature="e#3736#3954#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="70" lean-forward="false" selection-start-line="3" selection-start-column="70" selection-end-line="3" selection-end-column="70" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addRemoveNodes.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="28" column="20" lean-forward="false" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+          <folding>
+            <element signature="e#2630#2872#0" expanded="false" />
+            <element signature="e#2904#3247#0" expanded="false" />
+            <element signature="e#3472#3612#0" expanded="false" />
+            <element signature="e#3642#3703#0" expanded="false" />
+            <element signature="e#3735#3953#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
