@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+    body {
+        font-family: Montserrat,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji'
+    }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+
+<h2>Adding/Removing Nodes from D3 Force Layout</h2>
+<h3><a href="https://www.samollason.co.uk" target="_blank">Sam Ollason</a></h3>
+
+<p>
+    Created using D3 v4.
+    Double-click on a node to make it selected.
+</p>
+
+<button id="add">Add Node</button>
+<div>Selected node: <p id="selectedNode"></p></div>
+
+<button id="removeSelected">Remove Selected</button>
+
+<div></div>
+<div id="svg"></div>
+
+
+</body>
+</html>
+
+<script>
+
+    let selectedNode = null;
+
+    // Colours for nodes
+    const colours = [ 'red', 'green', 'blue'];
+
+    // Sizes for nodes
+    const radiusOptions = [ 10, 20, 30 ];
+
+    // Unused here, but could be used to freeze/restart simulation
+    let nodesFrozen = false;
+
+    const smallScreen = window.innerWidth < 500;
+    const width       = smallScreen ? window.innerWidth - 50 : window.innerWidth - 400;
+    const height      = smallScreen ? 300 : 600;
+
+    const graphData =
+        {
+            "nodes": [
+                { "id": 1, "group": 0 },
+                { "id": 2, "group": 0 },
+                { "id": 3, "group": 0 },
+                { "id": 4, "group": 0 },
+                { "id": 5, "group": 1 },
+                { "id": 6, "group": 1 },
+                { "id": 7, "group": 2 },
+                { "id": 8, "group": 2 },
+                { "id": 9, "group": 2 },
+            ]
+        };
+
+    const simulation = d3.forceSimulation();
+
+    simulation
+        .alphaDecay(0.1)
+        .force('charge', d3.forceManyBody()
+            .strength(100))
+        .force('center', d3.forceCenter(width / 2, height / 2))
+        .force('collision', d3.forceCollide().radius(function(d) {
+            return radiusOptions[d.group];
+        }))
+        .velocityDecay(0.2);
+
+    // Get DOM element and create a d3 selection.
+    // Add an SVG element and set width
+    const svgSelection =
+        d3.select('#svg')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+
+    // Add containers for nodes and labels to SVG container created above.
+    // These selections will be empty a this point as there are no nodes or labels on page!
+    let node   =  svgSelection.append('g').attr('class', 'nodes').selectAll('.node');
+
+    const tickUnfrozen = () => {
+        node
+            .attr('cx', function(d) {
+                return d.x;  // return x position of node
+            })
+            .attr('cy', function(d) {
+                return d.y; // return y position of node
+            });
+    };
+
+    const tickFrozen = () => {
+        node
+            .attr('cx', function(d) {
+                d.fx = d.x; // fix node x-position
+                return d.x; // return x position of node
+            })
+            .attr('cy', function(d) {
+                d.fy = d.y; // fix node y-position
+                return d.y; // return y position of node
+            });
+    };
+
+    // Called each time D3 internal clock iterates
+    const tick = () => {
+        if(nodesFrozen) {
+            tickFrozen();
+        } else {
+            tickUnfrozen();
+        }
+    };
+
+    const dragstarted = (d) => {
+        if (!d3.event.active) {
+            simulation.alphaTarget(0.3).restart();
+        }
+        d.fx = d.x;
+        d.fy = d.y;
+    };
+
+    const dragged = (d) => {
+        d.fx = d3.event.x;
+        d.fy = d3.event.y;
+    };
+
+    const dragended = (d) => {
+        if (!d3.event.active) simulation.alphaTarget(0.1);
+
+        if(nodesFrozen) {
+            d.fx = d.x;
+            d.fy = d.y;
+        } else {
+            d.fx = null;
+            d.fy = null;
+        }
+    };
+
+    const doubleclick = (d) => {
+        console.log('double click');
+        selectedNode = d.id;
+        document.getElementById('selectedNode').innerHTML = d.id;
+    };
+
+    const draw = (data) => {
+        console.log('draw');
+
+        node = node
+            .data(data.nodes, function (d) {return d.id;});
+
+        node
+            .exit().remove();
+
+        node = node
+            .enter()
+            .append('circle')
+            .attr('fill', function (d) {
+                return colours[d.group];
+            })
+            .attr('cursor', 'grab')
+            .attr('r', function (d) {
+                return radiusOptions[d.group];
+            })
+            .attr('id', function (d) {
+                return d.id;
+            })
+            .merge(node)
+            .call(d3.drag()
+                .on('start', dragstarted)
+                .on('drag', dragged)
+                .on('end', dragended))
+            .on('dblclick', doubleclick);
+
+        simulation
+            .nodes(data.nodes)
+            .on('tick', tick);
+
+        // Start simulation
+        simulation.alpha(1).alphaTarget(0.3).restart();
+    };
+
+    const init = () => {
+        console.log('init');
+        draw(graphData);
+    };
+
+    // Called first time script loaded
+    init();
+
+    let idNum = 9;
+    d3.select('#add').on("click", function() {
+        const newId = idNum++;
+
+        // Group 0: random < 0.33
+        // Group 1: 0.33 =< random < 0.66
+        // Group 2: 0.66 <= random
+        const random = Math.random();
+        const group = random < 0.66 ? (random < 0.33 ? 0 : 1) : 2;
+
+        graphData.nodes.push({"id": newId, "group": group, "name": "New!",});
+
+        // Now redraw
+        draw(graphData)
+    });
+
+    d3.select('#removeSelected').on("click", function() {
+
+        if(selectedNode){
+            graphData.nodes = graphData.nodes.filter(e => e.id !== selectedNode);
+
+            selectedNode = null;
+            document.getElementById('selectedNode').innerHTML = selectedNode;
+
+            // Now redraw
+            draw(graphData)
+        }
+    });
+
+</script>
